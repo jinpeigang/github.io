@@ -25,13 +25,15 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
   
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
   <!-- 加载特效 -->
     <script src="/js/pace.js"></script>
     <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
   <script>
       var yiliaConfig = {
           rootUrl: '/',
-          fancybox: ,
+          fancybox: true,
           animate: true,
           isHome: false,
           isPost: false,
@@ -50,7 +52,7 @@
     <header id="header" class="inner">
         <a href="/" class="profilepic">
             
-            <img lazy-src="/img/head.jpg" class="js-avatar">
+            <img lazy-src="/img/head.jpg" class="js-avatar show">
             
         </a>
 
@@ -219,7 +221,7 @@
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >访数人数: 
+                        <span id="site-visit" >海贼到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
