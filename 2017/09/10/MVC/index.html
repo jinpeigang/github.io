@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MVC(Model-View-Controller)实例应用模式 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
+<meta name="keywords" content="MVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVC(Model-View-Controller)实例应用模式">
+<meta property="og:url" content="http://yoursite.com/2017/09/10/MVC/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
+<meta property="og:updated_time" content="2017-09-12T00:30:23.943Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVC(Model-View-Controller)实例应用模式">
+<meta name="twitter:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
+  
+    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar show">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Jin Peigang</a></h1>
+        </hgroup>
+
+        
+        
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="http://jinpeigang.club/">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">个人介绍</a></li>
+                        
+                            <li><a href="/archives">所有文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/jinpeigang" title="github">github</a>
+                            
+                                <a class="fl twitter" target="_blank" href="http://www.cnblogs.com/jinpeigang/" title="twitter">twitter</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://jinpeigang.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">精通java,熟悉c++，c#,能够熟练操作sql server和mysql,了解hbase,oracle</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Jin Peigang</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Jin Peigang</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="http://jinpeigang.club/">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">个人介绍</a></li>
+                
+                    <li><a href="/archives">所有文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="github" target="_blank" href="https://github.com/jinpeigang" title="github">github</a>
+                    
+                        <a class="twitter" target="_blank" href="http://www.cnblogs.com/jinpeigang/" title="twitter">twitter</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-MVC" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/10/MVC/" class="article-date">
+      <time datetime="2017-09-10T02:33:23.000Z" itemprop="datePublished">2017-09-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MVC(Model-View-Controller)实例应用模式
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>此篇博客主要介绍MVC模式的实例应用，以登录为例<br><a id="more"></a><br><strong>Model: User</strong><br>    package com.keith.bean;  </p>
+<pre><code>public class TUser implements java.io.Serializable {  
+private static final long serialVersionUID = 1L;  
+
+private Integer userid;  
+private String userName;  
+private String pwd;  
+
+public TUser() {  
+}  
+
+public Integer getUserid() {  
+    return userid;  
+}  
+
+public void setUserid(Integer userid) {  
+    this.userid = userid;  
+}  
+
+public String getUserName() {  
+    return userName;  
+}  
+
+public void setUserName(String userName) {  
+    this.userName = userName;  
+}  
+
+public String getPwd() {  
+    return pwd;  
+}  
+
+public void setPwd(String pwd) {  
+    this.pwd = pwd;  
+}  
+
+}  
+</code></pre><p> <strong>数据库连接类</strong><br>      package com.keith.util;  </p>
+<pre><code>import java.sql.Connection;  
+import java.sql.DriverManager;  
+import java.sql.SQLException;  
+
+public class DBConn {  
+private static final String DBDRIVER = &quot;com.mysql.jdbc.Driver&quot;;  
+private static final String DBURL = &quot;jdbc:mysql://127.0.0.1:3306/login&quot;;  
+private static final String DBUSER = &quot;root&quot;;  
+private static final String DBPWD = &quot;kejianjun&quot;;  
+private Connection conn = null;  
+
+public DBConn() {  
+    try {  
+        Class.forName(DBDRIVER);  
+        conn = DriverManager.getConnection(DBURL, DBUSER, DBPWD);  
+    } catch (ClassNotFoundException e) {  
+        e.printStackTrace();  
+    } catch (SQLException e) {  
+        e.printStackTrace();  
+    }  
+
+}  
+
+public void close() throws Exception{  
+    if (this.conn != null) {  
+        try {  
+            conn.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+
+    }  
+}  
+public Connection getConn() {  
+    return conn;  
+}  
+
+public void setConn(Connection conn) {  
+    this.conn = conn;  
+}  
+
+}  
+</code></pre><p><strong>View:登录jsp页面</strong></p>
+<pre><code> &lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;utf-8&quot;%&gt;  
+  &lt;%  
+ String path = request.getContextPath();  
+ String basePath = request.getScheme()+&quot;://&quot;+request.getServerName()+&quot;:&quot;+request.getServerPort()+path+&quot;/&quot;;  
+%&gt;  
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;  
+&lt;html&gt;  
+ &lt;head&gt;  
+&lt;base href=&quot;&lt;%=basePath%&gt;&quot;&gt;  
+
+&lt;title&gt;My JSP &apos;index.jsp&apos; starting page&lt;/title&gt;  
+&lt;meta http-equiv=&quot;pragma&quot; content=&quot;no-cache&quot;&gt;  
+&lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;  
+&lt;meta http-equiv=&quot;expires&quot; content=&quot;0&quot;&gt;      
+&lt;meta http-equiv=&quot;keywords&quot; content=&quot;keyword1,keyword2,keyword3&quot;&gt;  
+&lt;meta http-equiv=&quot;description&quot; content=&quot;This is my page&quot;&gt;  
+&lt;!--  
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;styles.css&quot;&gt;  
+  --&gt;  
+&lt;script type=&quot;text/javascript&quot;&gt;  
+    function validate(f){  
+        if (!(/^\w{4,15}$/.test(f.username.value))) {  
+            alert(&quot;用户名必须是4~16位！&quot;);  
+            f.username.focus();  
+            return false;  
+        }  
+        if (!(/^\w{4,15}$/.test(f.pwd.value))) {  
+            alert(&quot;密码必须是4~15位!&quot;);  
+            f.pwd.focus();  
+            return false;  
+        }  
+        return true;  
+    }  
+&lt;/script&gt;  
+&lt;/head&gt;  
+
+&lt;body&gt;  
+&lt;%  
+List&lt;String&gt; info = (List&lt;String&gt;)request.getAttribute(&quot;info&quot;);  
+if(info != null){  
+    Iterator&lt;String&gt; iter = info.iterator();  
+    while(iter.hasNext()){  
+%&gt;  
+&lt;h3&gt;&lt;font color=&quot;red&quot;&gt;&lt;%=iter.next() %&gt;&lt;/font&gt;&lt;/h3&gt;   
+&lt;%}  
+} %&gt;  
+&lt;form action=&quot;login&quot; method=&quot;post&quot; onsubmit=&quot;return validate(this)&quot; name=&quot;f&quot;&gt;  
+    用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br /&gt;  
+    密&amp;nbsp;码:&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;br /&gt;  
+    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;  
+    &lt;input type=&quot;reset&quot; value=&quot;取消&quot;&gt;         
+&lt;/form&gt;  
+&lt;/body&gt;  
+&lt;/html&gt;  
+</code></pre><p><strong>配置Web.xml</strong></p>
+<pre><code> &lt;servlet&gt;  
+ &lt;servlet-name&gt;login&lt;/servlet-name&gt;  
+&lt;servlet-class&gt;com.keith.servlet.LoginServlet&lt;/servlet-class&gt;  
+&lt;/servlet&gt;    
+ &lt;servlet-mapping&gt;  
+&lt;servlet-name&gt;login&lt;/servlet-name&gt;  
+&lt;url-pattern&gt;/login&lt;/url-pattern&gt;  
+&lt;/servlet-mapping&gt;  
+
+ &lt;servlet&gt;  
+</code></pre><p> <strong>Contorller控制层 servlet</strong></p>
+<pre><code>package com.keith.servlet;  
+
+import java.io.IOException;  
+import java.util.ArrayList;  
+import java.util.List;  
+
+import javax.servlet.ServletException;  
+import javax.servlet.http.HttpServlet;  
+import javax.servlet.http.HttpServletRequest;  
+import javax.servlet.http.HttpServletResponse;  
+
+import com.keith.bean.TUser;  
+import com.keith.factory.DAOFactory;  
+
+
+public class LoginServlet extends HttpServlet {  
+private static final long serialVersionUID = 1L;  
+
+@Override  
+protected void doGet(HttpServletRequest req, HttpServletResponse resp)  
+        throws ServletException, IOException {  
+    this.doPost(req, resp);  
+}  
+
+@Override  
+protected void doPost(HttpServletRequest req, HttpServletResponse resp)  
+        throws ServletException, IOException {  
+    String sucPath = &quot;main.jsp&quot;;  
+    String loginEroPath = &quot;index.jsp&quot;;  
+    String username = req.getParameter(&quot;username&quot;);  
+    String pwd = req.getParameter(&quot;pwd&quot;);  
+    List&lt;String&gt; info = new ArrayList&lt;String&gt;();  
+    if (username == null || &quot;&quot;.equals(username)) {  
+        info.add(&quot;用户名不能为空!&quot;);  
+    }  
+    if (pwd == null || &quot;&quot;.equals(pwd)) {  
+        info.add(&quot;密码不能为空！&quot;);  
+    }  
+    //用户名密码通过验证  
+    if (info.size() == 0) {  
+        //实例化VO  
+        TUser user = new TUser();  
+        //设置username  
+        user.setUserName(username);  
+        //设置pwd  
+        user.setPwd(pwd);  
+        if (DAOFactory.getIUserDAOInstance().findLogin(user)) {  
+            info.add(&quot;欢迎：&quot; + user.getUserName());  
+            //保存信息，进行跳转  
+            req.setAttribute(&quot;info&quot;, info);  
+            req.getRequestDispatcher(sucPath).forward(req, resp);  
+        } else {  
+            info.add(&quot;用户信息错误！&quot;);  
+            req.setAttribute(&quot;info&quot;, info);  
+            req.getRequestDispatcher(loginEroPath).forward(req, resp);  
+        }  
+    }  
+}  
+
+}  
+</code></pre><p><strong>通过DAO工厂找到UserDAO的实例：这是DAOFactory：</strong></p>
+<pre><code>package com.keith.factory;  
+
+import com.keith.dao.IUserDAO;  
+import com.keith.dao.proxy.UserDAOProxy;  
+
+
+public class DAOFactory {  
+
+public static IUserDAO getIUserDAOInstance(){  
+    //返回代理实例  
+    return new UserDAOProxy();  
+}  
+}  
+</code></pre><p><strong>返回代理实例，找到userDAO的代理类：</strong></p>
+<pre><code> Java代码  
+
+ package com.keith.dao.proxy;  
+
+  import com.keith.bean.TUser;  
+ import com.keith.dao.IUserDAO;  
+ import com.keith.dao.UserDAOImpl;  
+import com.keith.util.DBConn;  
+
+   /** 
+   * DAO代理操作类 
+   *  
+   * @author T 
+   *  
+ */  
+public class UserDAOProxy implements IUserDAO {  
+private DBConn dbc = null;  
+private IUserDAO dao = null;  
+
+public UserDAOProxy() {  
+    //实例化数据库连接  
+    this.dbc = new DBConn();  
+    this.dao = new UserDAOImpl(this.dbc.getConn());  
+}  
+
+/** 
+ * 代理登陆方法 
+ */  
+public boolean findLogin(TUser user) {  
+    boolean flag = false;  
+    try {  
+        // 调用真实主题  
+        flag = this.dao.findLogin(user);  
+        this.dbc.close();  
+    } catch (Exception e) {  
+        e.printStackTrace();  
+    }  
+    return flag;  
+}  
+</code></pre><p> }<br> <strong>找到UserDAOImpl的并执行它的findLogin()方法：</strong></p>
+<pre><code> Java代码  
+
+package com.keith.dao;  
+
+ import java.sql.Connection;  
+ import java.sql.PreparedStatement;  
+ import java.sql.ResultSet;  
+import java.sql.SQLException;  
+
+import com.keith.bean.TUser;  
+
+public class UserDAOImpl implements IUserDAO {  
+private Connection conn = null;  
+private PreparedStatement pstm = null;  
+
+public UserDAOImpl(Connection conn) {  
+    this.conn = conn;  
+}  
+
+
+public boolean findLogin(TUser user) {  
+    boolean flag = false;  
+    try {  
+        String sql = &quot;SELECT username,pwd FROM tuser WHERE username=? and pwd=?&quot;;  
+        this.pstm = this.conn.prepareStatement(sql);  
+        this.pstm.setString(1, user.getUserName());  
+        this.pstm.setString(2, user.getPwd());  
+        ResultSet rs = this.pstm.executeQuery();  
+        if (rs.next()) {  
+            user.setUserName(rs.getString(1));  
+            flag = true;  
+        }  
+    } catch (SQLException e) {  
+        e.printStackTrace();  
+    } finally {  
+        try {  
+            if (this.pstm != null) {  
+                this.pstm.close();  
+            }  
+        } catch (SQLException e2) {  
+            e2.printStackTrace();  
+        }  
+    }  
+    return flag;  
+}  
+</code></pre><p>}<br> <strong>实现了IUserDAO接口：</strong></p>
+<pre><code>Java代码  
+
+package com.keith.dao;  
+
+import java.sql.SQLException;  
+
+import com.keith.bean.TUser;  
+
+
+public interface IUserDAO {  
+
+public boolean findLogin(TUser user);  
+ }  
+</code></pre>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/09/10/MVC/">MVC(Model-View-Controller)实例应用模式</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Jin Peigang 的个人博客">Jin Peigang</a></p>
+        <p><span>发布时间:</span>2017年09月10日 - 10时33分</p>
+        <p><span>最后更新:</span>2017年09月12日 - 08时30分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/10/MVC/" title="MVC(Model-View-Controller)实例应用模式">http://yoursite.com/2017/09/10/MVC/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/10/MVC/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/10/githubPages/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">githubPages</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'jinpeigang',
+      repo: 'jinpeigang.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/09/10/githubPages/" title="下一篇: githubPages">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/MVC/">MVC(Model-View-Controller)实例应用模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/githubPages/">githubPages</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Jin Peigang
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
