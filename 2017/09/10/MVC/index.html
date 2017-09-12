@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/10/MVC/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
-<meta property="og:updated_time" content="2017-09-12T00:30:23.943Z">
+<meta property="og:updated_time" content="2017-09-12T00:35:56.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC(Model-View-Controller)实例应用模式">
 <meta name="twitter:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
@@ -201,8 +201,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>此篇博客主要介绍MVC模式的实例应用，以登录为例<br><a id="more"></a><br><strong>Model: User</strong><br>    package com.keith.bean;  </p>
-<pre><code>public class TUser implements java.io.Serializable {  
+        <p>此篇博客主要介绍MVC模式的实例应用，以登录为例<br><a id="more"></a><br><strong>Model: User</strong></p>
+<pre><code>package com.keith.bean;  
+
+public class TUser implements java.io.Serializable {  
 private static final long serialVersionUID = 1L;  
 
 private Integer userid;  
@@ -237,8 +239,10 @@ public void setPwd(String pwd) {
 }  
 
 }  
-</code></pre><p> <strong>数据库连接类</strong><br>      package com.keith.util;  </p>
-<pre><code>import java.sql.Connection;  
+</code></pre><p> <strong>数据库连接类</strong></p>
+<pre><code>  package com.keith.util;  
+
+import java.sql.Connection;  
 import java.sql.DriverManager;  
 import java.sql.SQLException;  
 
@@ -580,7 +584,7 @@ public boolean findLogin(TUser user);
         <p><span>本文标题:</span><a href="/2017/09/10/MVC/">MVC(Model-View-Controller)实例应用模式</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jin Peigang 的个人博客">Jin Peigang</a></p>
         <p><span>发布时间:</span>2017年09月10日 - 10时33分</p>
-        <p><span>最后更新:</span>2017年09月12日 - 08时30分</p>
+        <p><span>最后更新:</span>2017年09月12日 - 08时35分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/09/10/MVC/" title="MVC(Model-View-Controller)实例应用模式">http://yoursite.com/2017/09/10/MVC/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/10/MVC/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
