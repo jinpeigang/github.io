@@ -142,7 +142,7 @@ var canhtml5=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        html5T(deg);
-	        if(deg>288){
+	        if(deg>216){
 	            clearInterval(time);
 	        }
 	    }    
@@ -164,7 +164,7 @@ var cancss3=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        css3T(deg);
-	        if(deg>205){
+	        if(deg>144){
 	            clearInterval(time);
 	        }
 	    }    
@@ -189,7 +189,7 @@ var canjs=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        jsT(deg);
-	        if(deg>246){
+	        if(deg>144){
 	            clearInterval(time);
 	        }
 	    }    
@@ -211,7 +211,7 @@ var canjq=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        jqT(deg);
-	        if(deg>288){
+	        if(deg>216){
 	            clearInterval(time);
 	        }
 	    }    
@@ -233,7 +233,7 @@ var canbs=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        bsT(deg);
-	        if(deg>143){
+	        if(deg>72){
 	            clearInterval(time);
 	        }
 	    }    
@@ -256,7 +256,7 @@ var ps=function(){
     	if (con.style.display=="block") {
     		deg+=4;
 	        psT(deg);
-	        if(deg>286){
+	        if(deg>180){
 	            clearInterval(time);
 	        }
 	    }    
