@@ -3,19 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MVC(Model-View-Controller)实例应用模式 | Hexo</title>
+  <title>hadoop伪分布式配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
-<meta name="keywords" content="MVC">
+  <meta name="description" content="此篇博客主要介绍centos系统中jdk安装以及hadoop的伪分布式安装配置">
+<meta name="keywords" content="hadoop伪分布式配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVC(Model-View-Controller)实例应用模式">
-<meta property="og:url" content="http://yoursite.com/2017/09/12/MVC/index.html">
+<meta property="og:title" content="hadoop伪分布式配置">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/hadoop伪分布式配置/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
-<meta property="og:updated_time" content="2017-09-12T00:39:28.784Z">
+<meta property="og:description" content="此篇博客主要介绍centos系统中jdk安装以及hadoop的伪分布式安装配置">
+<meta property="og:image" content="http://yoursite.com/images/Hadoop/1.PNG">
+<meta property="og:image" content="http://yoursite.com/images/Hadoop/2.PNG">
+<meta property="og:image" content="http://yoursite.com/images/Hadoop/3.PNG">
+<meta property="og:image" content="http://yoursite.com/images/Hadoop/4.PNG">
+<meta property="og:updated_time" content="2017-09-19T01:53:26.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MVC(Model-View-Controller)实例应用模式">
-<meta name="twitter:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
+<meta name="twitter:title" content="hadoop伪分布式配置">
+<meta name="twitter:description" content="此篇博客主要介绍centos系统中jdk安装以及hadoop的伪分布式安装配置">
+<meta name="twitter:image" content="http://yoursite.com/images/Hadoop/1.PNG">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -163,11 +168,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-MVC" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-hadoop伪分布式配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/09/12/MVC/" class="article-date">
-      <time datetime="2017-09-12T00:39:33.000Z" itemprop="datePublished">2017-09-12</time>
+      <a href="/2017/09/19/hadoop伪分布式配置/" class="article-date">
+      <time datetime="2017-09-19T00:57:31.000Z" itemprop="datePublished">2017-09-19</time>
 </a>
     </div>
   
@@ -180,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MVC(Model-View-Controller)实例应用模式
+      hadoop伪分布式配置
     </h1>
   
 
@@ -191,7 +196,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop伪分布式配置/">hadoop伪分布式配置</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -201,331 +206,72 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>此篇博客主要介绍MVC模式的实例应用，以登录为例<br><a id="more"></a><br><strong>Model: User</strong></p>
-<pre><code>package com.keith.bean;  
-
-public class TUser implements java.io.Serializable {  
-private static final long serialVersionUID = 1L;  
-
-private Integer userid;  
-private String userName;  
-private String pwd;  
-
-public TUser() {  
-}  
-
-public Integer getUserid() {  
-    return userid;  
-}  
-
-public void setUserid(Integer userid) {  
-    this.userid = userid;  
-}  
-
-public String getUserName() {  
-    return userName;  
-}  
-
-public void setUserName(String userName) {  
-    this.userName = userName;  
-}  
-
-public String getPwd() {  
-    return pwd;  
-}  
-
-public void setPwd(String pwd) {  
-    this.pwd = pwd;  
-}  
-
-}  
-</code></pre><p> <strong>数据库连接类</strong></p>
-<pre><code>  package com.keith.util;  
-
-import java.sql.Connection;  
-import java.sql.DriverManager;  
-import java.sql.SQLException;  
-
-public class DBConn {  
-private static final String DBDRIVER = &quot;com.mysql.jdbc.Driver&quot;;  
-private static final String DBURL = &quot;jdbc:mysql://127.0.0.1:3306/login&quot;;  
-private static final String DBUSER = &quot;root&quot;;  
-private static final String DBPWD = &quot;kejianjun&quot;;  
-private Connection conn = null;  
-
-public DBConn() {  
-    try {  
-        Class.forName(DBDRIVER);  
-        conn = DriverManager.getConnection(DBURL, DBUSER, DBPWD);  
-    } catch (ClassNotFoundException e) {  
-        e.printStackTrace();  
-    } catch (SQLException e) {  
-        e.printStackTrace();  
-    }  
-
-}  
-
-public void close() throws Exception{  
-    if (this.conn != null) {  
-        try {  
-            conn.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-
-    }  
-}  
-public Connection getConn() {  
-    return conn;  
-}  
-
-public void setConn(Connection conn) {  
-    this.conn = conn;  
-}  
-
-}  
-</code></pre><p><strong>View:登录jsp页面</strong></p>
-<pre><code> &lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;utf-8&quot;%&gt;  
-  &lt;%  
- String path = request.getContextPath();  
- String basePath = request.getScheme()+&quot;://&quot;+request.getServerName()+&quot;:&quot;+request.getServerPort()+path+&quot;/&quot;;  
-%&gt;  
-
-&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;  
-&lt;html&gt;  
- &lt;head&gt;  
-&lt;base href=&quot;&lt;%=basePath%&gt;&quot;&gt;  
-
-&lt;title&gt;My JSP &apos;index.jsp&apos; starting page&lt;/title&gt;  
-&lt;meta http-equiv=&quot;pragma&quot; content=&quot;no-cache&quot;&gt;  
-&lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;  
-&lt;meta http-equiv=&quot;expires&quot; content=&quot;0&quot;&gt;      
-&lt;meta http-equiv=&quot;keywords&quot; content=&quot;keyword1,keyword2,keyword3&quot;&gt;  
-&lt;meta http-equiv=&quot;description&quot; content=&quot;This is my page&quot;&gt;  
-&lt;!--  
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;styles.css&quot;&gt;  
-  --&gt;  
-&lt;script type=&quot;text/javascript&quot;&gt;  
-    function validate(f){  
-        if (!(/^\w{4,15}$/.test(f.username.value))) {  
-            alert(&quot;用户名必须是4~16位！&quot;);  
-            f.username.focus();  
-            return false;  
-        }  
-        if (!(/^\w{4,15}$/.test(f.pwd.value))) {  
-            alert(&quot;密码必须是4~15位!&quot;);  
-            f.pwd.focus();  
-            return false;  
-        }  
-        return true;  
-    }  
-&lt;/script&gt;  
-&lt;/head&gt;  
-
-&lt;body&gt;  
-&lt;%  
-List&lt;String&gt; info = (List&lt;String&gt;)request.getAttribute(&quot;info&quot;);  
-if(info != null){  
-    Iterator&lt;String&gt; iter = info.iterator();  
-    while(iter.hasNext()){  
-%&gt;  
-&lt;h3&gt;&lt;font color=&quot;red&quot;&gt;&lt;%=iter.next() %&gt;&lt;/font&gt;&lt;/h3&gt;   
-&lt;%}  
-} %&gt;  
-&lt;form action=&quot;login&quot; method=&quot;post&quot; onsubmit=&quot;return validate(this)&quot; name=&quot;f&quot;&gt;  
-    用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br /&gt;  
-    密&amp;nbsp;码:&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;br /&gt;  
-    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;  
-    &lt;input type=&quot;reset&quot; value=&quot;取消&quot;&gt;         
-&lt;/form&gt;  
-&lt;/body&gt;  
-&lt;/html&gt;  
-</code></pre><p><strong>配置Web.xml</strong></p>
-<pre><code> &lt;servlet&gt;  
- &lt;servlet-name&gt;login&lt;/servlet-name&gt;  
-&lt;servlet-class&gt;com.keith.servlet.LoginServlet&lt;/servlet-class&gt;  
-&lt;/servlet&gt;    
- &lt;servlet-mapping&gt;  
-&lt;servlet-name&gt;login&lt;/servlet-name&gt;  
-&lt;url-pattern&gt;/login&lt;/url-pattern&gt;  
-&lt;/servlet-mapping&gt;  
-
- &lt;servlet&gt;  
-</code></pre><p> <strong>Contorller控制层 servlet</strong></p>
-<pre><code>package com.keith.servlet;  
-
-import java.io.IOException;  
-import java.util.ArrayList;  
-import java.util.List;  
-
-import javax.servlet.ServletException;  
-import javax.servlet.http.HttpServlet;  
-import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
-
-import com.keith.bean.TUser;  
-import com.keith.factory.DAOFactory;  
-
-
-public class LoginServlet extends HttpServlet {  
-private static final long serialVersionUID = 1L;  
-
-@Override  
-protected void doGet(HttpServletRequest req, HttpServletResponse resp)  
-        throws ServletException, IOException {  
-    this.doPost(req, resp);  
-}  
-
-@Override  
-protected void doPost(HttpServletRequest req, HttpServletResponse resp)  
-        throws ServletException, IOException {  
-    String sucPath = &quot;main.jsp&quot;;  
-    String loginEroPath = &quot;index.jsp&quot;;  
-    String username = req.getParameter(&quot;username&quot;);  
-    String pwd = req.getParameter(&quot;pwd&quot;);  
-    List&lt;String&gt; info = new ArrayList&lt;String&gt;();  
-    if (username == null || &quot;&quot;.equals(username)) {  
-        info.add(&quot;用户名不能为空!&quot;);  
-    }  
-    if (pwd == null || &quot;&quot;.equals(pwd)) {  
-        info.add(&quot;密码不能为空！&quot;);  
-    }  
-    //用户名密码通过验证  
-    if (info.size() == 0) {  
-        //实例化VO  
-        TUser user = new TUser();  
-        //设置username  
-        user.setUserName(username);  
-        //设置pwd  
-        user.setPwd(pwd);  
-        if (DAOFactory.getIUserDAOInstance().findLogin(user)) {  
-            info.add(&quot;欢迎：&quot; + user.getUserName());  
-            //保存信息，进行跳转  
-            req.setAttribute(&quot;info&quot;, info);  
-            req.getRequestDispatcher(sucPath).forward(req, resp);  
-        } else {  
-            info.add(&quot;用户信息错误！&quot;);  
-            req.setAttribute(&quot;info&quot;, info);  
-            req.getRequestDispatcher(loginEroPath).forward(req, resp);  
-        }  
-    }  
-}  
-
-}  
-</code></pre><p><strong>通过DAO工厂找到UserDAO的实例：这是DAOFactory：</strong></p>
-<pre><code>package com.keith.factory;  
-
-import com.keith.dao.IUserDAO;  
-import com.keith.dao.proxy.UserDAOProxy;  
-
-
-public class DAOFactory {  
-
-public static IUserDAO getIUserDAOInstance(){  
-    //返回代理实例  
-    return new UserDAOProxy();  
-}  
-}  
-</code></pre><p><strong>返回代理实例，找到userDAO的代理类：</strong></p>
-<pre><code> Java代码  
-
- package com.keith.dao.proxy;  
-
-  import com.keith.bean.TUser;  
- import com.keith.dao.IUserDAO;  
- import com.keith.dao.UserDAOImpl;  
-import com.keith.util.DBConn;  
-
-   /** 
-   * DAO代理操作类 
-   *  
-   * @author T 
-   *  
- */  
-public class UserDAOProxy implements IUserDAO {  
-private DBConn dbc = null;  
-private IUserDAO dao = null;  
-
-public UserDAOProxy() {  
-    //实例化数据库连接  
-    this.dbc = new DBConn();  
-    this.dao = new UserDAOImpl(this.dbc.getConn());  
-}  
-
-/** 
- * 代理登陆方法 
- */  
-public boolean findLogin(TUser user) {  
-    boolean flag = false;  
-    try {  
-        // 调用真实主题  
-        flag = this.dao.findLogin(user);  
-        this.dbc.close();  
-    } catch (Exception e) {  
-        e.printStackTrace();  
-    }  
-    return flag;  
-}  
-</code></pre><p> }<br> <strong>找到UserDAOImpl的并执行它的findLogin()方法：</strong></p>
-<pre><code> Java代码  
-
-package com.keith.dao;  
-
- import java.sql.Connection;  
- import java.sql.PreparedStatement;  
- import java.sql.ResultSet;  
-import java.sql.SQLException;  
-
-import com.keith.bean.TUser;  
-
-public class UserDAOImpl implements IUserDAO {  
-private Connection conn = null;  
-private PreparedStatement pstm = null;  
-
-public UserDAOImpl(Connection conn) {  
-    this.conn = conn;  
-}  
-
-
-public boolean findLogin(TUser user) {  
-    boolean flag = false;  
-    try {  
-        String sql = &quot;SELECT username,pwd FROM tuser WHERE username=? and pwd=?&quot;;  
-        this.pstm = this.conn.prepareStatement(sql);  
-        this.pstm.setString(1, user.getUserName());  
-        this.pstm.setString(2, user.getPwd());  
-        ResultSet rs = this.pstm.executeQuery();  
-        if (rs.next()) {  
-            user.setUserName(rs.getString(1));  
-            flag = true;  
-        }  
-    } catch (SQLException e) {  
-        e.printStackTrace();  
-    } finally {  
-        try {  
-            if (this.pstm != null) {  
-                this.pstm.close();  
-            }  
-        } catch (SQLException e2) {  
-            e2.printStackTrace();  
-        }  
-    }  
-    return flag;  
-}  
-</code></pre><p>}<br> <strong>实现了IUserDAO接口：</strong></p>
-<pre><code>Java代码  
-
-package com.keith.dao;  
-
-import java.sql.SQLException;  
-
-import com.keith.bean.TUser;  
-
-
-public interface IUserDAO {  
-
-public boolean findLogin(TUser user);  
- }  
+        <p>此篇博客主要介绍centos系统中jdk安装以及hadoop的伪分布式安装配置<br><a id="more"></a></p>
+<h1 id="1-jdk安装"><a href="#1-jdk安装" class="headerlink" title="1.jdk安装"></a>1.jdk安装</h1><p>1.解压jdk到指定目录下<br></p>
+<p>  2.配置环境变量，修改/etc/profile文件（root用户）<br></p>
+<pre><code>使用su切换到root用户&lt;br&gt;
+vi /etc/profile进入编辑器，输入i进入插入模式&lt;br&gt;
+在profile文件最后添加&lt;br&gt;
+JAVA_HOME=/home/sky/jdk1.8.0_121（sky自己用户名）&lt;br&gt;
+export PATH=$PATH:$JAVA_HOME/bin&lt;br&gt;
+</code></pre><p><br><br>  3.编辑完成后，ESC退出插入模式<br></p>
+<pre><code>输入：&lt;br&gt;
+ q  退出不保存&lt;br&gt;
+ wq 保存退出&lt;br&gt;
+ q! 强制退出&lt;br&gt;
+</code></pre><p><br><br>   4.把修改的环境变量生效（普通用户）<br></p>
+<pre><code>scource /etc/profile
+</code></pre><h1 id="2-Hadoop伪分布式安装"><a href="#2-Hadoop伪分布式安装" class="headerlink" title="2.Hadoop伪分布式安装"></a>2.Hadoop伪分布式安装</h1><blockquote>
+<p>1.解压hadoop之后，进入hadoop/etc/hadoop文件。<br><br> 2.修改配置文件hadoop-env.sh,vi 进入编辑模式，i插入，添加<br></p>
+</blockquote>
+<pre><code>export JAVA_HOME=/home/hadoop/jdk1.8.0_65(hadoop自己用户名)
+</code></pre><p>   <img src="/images/Hadoop/1.PNG" style="width: 300px;"><br>   <img src="/images/Hadoop/2.PNG" style="width: 300px;"><br> 3.修改配置文件core-site.xml,添加<br></p>
+<pre><code>&lt;property&gt;
+  &lt;name&gt;fs.defaultFS&lt;/name&gt;
+  &lt;value&gt;hdfs://sky1:9000&lt;/value&gt;（sky1主机名称）
+&lt;/property&gt;
+</code></pre><p><img src="/images/Hadoop/3.PNG" style="width: 300px;"><br> 4.修改配置文件 hdfs-site.xml，添加<br></p>
+<pre><code> &lt;property&gt;
+    &lt;name&gt;dfs.replication&lt;/name&gt;
+   &lt;value&gt;1&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>5.修改配置文件mapred-site.xml文件，注意此文件没有，可从模板文件中复制一份<br><br>   cp  mapred-site.xml.template  mapred-site.xml<br>     添加</p>
+<pre><code> &lt;property&gt;
+&lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+&lt;value&gt;yarn&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>6.修改配置文件yarn-site.xml,添加</p>
+<pre><code>&lt;property&gt;
+   &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+   &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>7.修改、etc/hosts文件（root用户），添加 ip+主机名称<br></p>
+<pre><code>192.168.88.99  sky1
+</code></pre><p>   <img src="/images/Hadoop/4.PNG" style="width: 300px;"><br>8.格式化HDFS,在hadoop解压目录下，执行如下命令：（普通用户操作）</p>
+<pre><code>bin/hdfs namenode –format
+注意：格式化只能操作一次，如果因为某种原bin/hdfs namenode –format因，集群不能用，需要再次格式化，需要把上一次格式化的信息删除，在/tmp目录里执行rm–rf *&lt;br&gt;
+</code></pre><p>9.启动集群，在hadoop解压目录下，执行如下命令：（普通用户操作）<br><br> 启动集群：sbin/start-all.sh<br><br>需要输入四次当前用户的密码(通过配置ssh互信解决)，启动后，在命令行输入jps有以下输出<br></p>
+<pre><code>[oracle@oracle hadoop-2.6.0]$ jps&lt;br&gt;
+   32033 Jps&lt;br&gt;
+   31718 SecondaryNameNode&lt;br&gt;
+   31528 DataNode&lt;br&gt;
+   31852 ResourceManager&lt;br&gt;
+   31437 NameNode&lt;br&gt;
+   31949 NodeManager&lt;br&gt;
+</code></pre><p><br><br>10.关闭集群：sbin/stop-all.sh需要输入四次当前用户的密码(通过配置ssh互信解决)</p>
+<h1 id="3-ssh互信配置"><a href="#3-ssh互信配置" class="headerlink" title="3.ssh互信配置"></a>3.ssh互信配置</h1><blockquote>
+<p>1.生成公钥和私钥 <br><br>   在命令行执行ssh-keygen,回车，什么也不输入，一路回车<br><br>   在用户根目录下，有一个.ssh文件<br></p>
+</blockquote>
+<pre><code>id_rsa 私钥&lt;br&gt;
+id_rsa.pub  公钥&lt;br&gt;
+known_hosts    通过SSH链接到本主机，都会在这里有记录&lt;br&gt;
+</code></pre><p>2.把公钥给信任的主机(本机)<br></p>
+<pre><code>在命令行输入ssh-copy-id 主机名称&lt;br&gt;
+ssh-copy-id oracle&lt;br&gt;
+复制的过程中需要输入信任主机的密码&lt;br&gt;
+</code></pre><p>3.验证，在命令行输入：ssh信任主机名称<br></p>
+<pre><code>ssh oracle&lt;br&gt;
+如果没有提示输入密码，则配置成功&lt;br&gt;
 </code></pre>
       
       
@@ -581,13 +327,13 @@ public boolean findLogin(TUser user);
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/09/12/MVC/">MVC(Model-View-Controller)实例应用模式</a></p>
+        <p><span>本文标题:</span><a href="/2017/09/19/hadoop伪分布式配置/">hadoop伪分布式配置</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jin Peigang 的个人博客">Jin Peigang</a></p>
-        <p><span>发布时间:</span>2017年09月12日 - 08时39分</p>
-        <p><span>最后更新:</span>2017年09月12日 - 08时39分</p>
+        <p><span>发布时间:</span>2017年09月19日 - 08时57分</p>
+        <p><span>最后更新:</span>2017年09月19日 - 09时53分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/09/12/MVC/" title="MVC(Model-View-Controller)实例应用模式">http://yoursite.com/2017/09/12/MVC/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/12/MVC/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/19/hadoop伪分布式配置/" title="hadoop伪分布式配置">http://yoursite.com/2017/09/19/hadoop伪分布式配置/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/19/hadoop伪分布式配置/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -600,18 +346,9 @@ public boolean findLogin(TUser user);
 
 <nav id="article-nav">
   
-    <a href="/2017/09/19/hadoop伪分布式配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          hadoop伪分布式配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/10/githubPages/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">githubPages</div>
+    <a href="/2017/09/12/MVC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MVC(Model-View-Controller)实例应用模式</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -622,7 +359,7 @@ public boolean findLogin(TUser user);
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-jdk安装"><span class="toc-number">1.</span> <span class="toc-text">1.jdk安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Hadoop伪分布式安装"><span class="toc-number">2.</span> <span class="toc-text">2.Hadoop伪分布式安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-ssh互信配置"><span class="toc-number">3.</span> <span class="toc-text">3.ssh互信配置</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -688,13 +425,11 @@ public boolean findLogin(TUser user);
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/09/19/hadoop伪分布式配置/" title="上一篇: hadoop伪分布式配置">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/09/10/githubPages/" title="下一篇: githubPages">
+            <a href="/2017/09/12/MVC/" title="下一篇: MVC(Model-View-Controller)实例应用模式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
