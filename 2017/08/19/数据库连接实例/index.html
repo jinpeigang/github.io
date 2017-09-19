@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MVC(Model-View-Controller)实例应用模式 | Hexo</title>
+  <title>数据库连接实例 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
-<meta name="keywords" content="MVC">
+  <meta name="description" content="这篇博客主要介绍mysql、sql server、oracle数据库连接的jsp源代码">
+<meta name="keywords" content="mysql、sql server、oracle数据库连接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVC(Model-View-Controller)实例应用模式">
-<meta property="og:url" content="http://yoursite.com/2017/09/12/MVC/index.html">
+<meta property="og:title" content="数据库连接实例">
+<meta property="og:url" content="http://yoursite.com/2017/08/19/数据库连接实例/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
-<meta property="og:updated_time" content="2017-09-12T00:39:28.784Z">
+<meta property="og:description" content="这篇博客主要介绍mysql、sql server、oracle数据库连接的jsp源代码">
+<meta property="og:updated_time" content="2017-09-19T10:13:59.707Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MVC(Model-View-Controller)实例应用模式">
-<meta name="twitter:description" content="此篇博客主要介绍MVC模式的实例应用，以登录为例">
+<meta name="twitter:title" content="数据库连接实例">
+<meta name="twitter:description" content="这篇博客主要介绍mysql、sql server、oracle数据库连接的jsp源代码">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -163,11 +163,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-MVC" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据库连接实例" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/09/12/MVC/" class="article-date">
-      <time datetime="2017-09-12T00:39:33.000Z" itemprop="datePublished">2017-09-12</time>
+      <a href="/2017/08/19/数据库连接实例/" class="article-date">
+      <time datetime="2017-08-19T10:03:11.000Z" itemprop="datePublished">2017-08-19</time>
 </a>
     </div>
   
@@ -180,7 +180,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MVC(Model-View-Controller)实例应用模式
+      数据库连接实例
     </h1>
   
 
@@ -191,7 +191,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql、sql-server、oracle数据库连接/">mysql、sql server、oracle数据库连接</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -201,332 +201,146 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>此篇博客主要介绍MVC模式的实例应用，以登录为例<br><a id="more"></a><br><strong>Model: User</strong></p>
-<pre><code>package com.keith.bean;  
+        <p>这篇博客主要介绍mysql、sql server、oracle数据库连接的jsp源代码<br><a id="more"></a><br><strong>mysql连接数据库</strong></p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=GB18030&quot;
+pageEncoding=&quot;GB18030&quot;%&gt;
+&lt;%@ page import=&quot;java.sql.*&quot; %&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=GB18030&quot;&gt;
+&lt;title&gt;连接数据库&lt;/title&gt;
+&lt;/head&gt;
+ &lt;body&gt;
+ &lt;%
+try{
+    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);    
+    Connection conn=DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&quot;,&quot;root&quot;,&quot;123456&quot;);
+    if(conn!=null){
+        out.println(&quot;数据库连接成功！&quot;);
+        Statement st;
+        st=conn.createStatement();
+           ResultSet rs=st.executeQuery(&quot;SELECT * from qw&quot;);
+        out.println(&quot;数据库表中的姓名为：&quot;);
+             while(rs.next())
+         {   String name=rs.getString(&quot;name&quot;); 
+                  out.println(name);
+                 out.println(&quot;&lt;/tr&gt;&lt;tr&gt;&quot;);
+                }
 
-public class TUser implements java.io.Serializable {  
-private static final long serialVersionUID = 1L;  
+       st.close();
+        conn.close();
+    }else{
+        out.println(&quot;数据库连接失败！&quot;);
+    }
+}catch(ClassNotFoundException e){
+    e.printStackTrace();
+}
+%&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><strong>sql server连接数据库</strong></p>
+<pre><code>  &lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=GB18030&quot;
+  pageEncoding=&quot;GB18030&quot;%&gt;
+ &lt;%@ page import=&quot;java.sql.*&quot; %&gt;
+ &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+ &lt;html&gt;
+ &lt;head&gt;
+ &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=GB18030&quot;&gt;
+ &lt;title&gt;连接数据库&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+ &lt;%
+try{
+    Class.forName(&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;);
+    String url=&quot;jdbc:sqlserver://localhost:1433; DatabaseName=test&quot;;
+    String username=&quot;sa&quot;;
+    String password=&quot;123456&quot;;
+    Connection conn=DriverManager.getConnection(url, username, password);
+    if(conn!=null){
+        out.println(&quot;数据库连接成功！&quot;);
+        Statement st;
+        st=conn.createStatement();
+           ResultSet rs=st.executeQuery(&quot;SELECT * from qw&quot;);
+        out.println(&quot;数据库表中的姓名为：&quot;);
+             while(rs.next())
+         {   String name=rs.getString(&quot;name&quot;); 
+                  out.println(name);
+                 out.println(&quot;&lt;/tr&gt;&lt;tr&gt;&quot;);
+                }
 
-private Integer userid;  
-private String userName;  
-private String pwd;  
+       st.close();
+        conn.close();
+    }else{
+        out.println(&quot;数据库连接失败！&quot;);
+    }
+}catch(ClassNotFoundException e){
+    e.printStackTrace();
+}
+%&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><strong>oracle连接数据库</strong></p>
+<pre><code>package DB;
+import java.sql.*;
+public class DBBean {
+private String driverStr = &quot;oracle.jdbc.driver.OracleDriver&quot;;
+private String connStr = &quot;jdbc:oracle:thin:@localhost:1521:orcl&quot;;
+private String dbusername = &quot;user_20142932&quot;;
+private String dbpassword = &quot;user_20142932&quot;;
+private Connection conn = null;
+private Statement stmt = null;
 
-public TUser() {  
-}  
+public DBBean() {
+    try {
+        Class.forName(driverStr);
+        conn = DriverManager.getConnection(connStr, dbusername, dbpassword);
+        stmt = conn.createStatement();
+        System.out.println(&quot;数据库连接成功！&quot;);
+        }
+    catch (Exception ex) {
+        System.out.println(&quot;连接数据库失败 \n错误原因： &quot;+ex.getMessage() );
+    }
+}
 
-public Integer getUserid() {  
-    return userid;  
-}  
+public int executeUpdate(String s) {
+    int result = 0;
+    try {
+        System.out.println(&quot;执行更新......&quot; );
+        result = stmt.executeUpdate(s);
+    } 
+    catch (Exception ex) 
+    {
+        System.out.println(&quot;执行更新错误\n错误原因：  &quot;+ex.getMessage());
+    }
+    return result;
+}
 
-public void setUserid(Integer userid) {  
-    this.userid = userid;  
-}  
+public ResultSet executeQuery(String s) {
+    ResultSet rs = null;
+    try {
+        System.out.println(&quot;执行查询......&quot; );
+        rs = stmt.executeQuery(s);
+    }
+    catch (Exception ex) {
+        System.out.println(&quot;执行查询错误?\n错误原因： &quot;+ex.getMessage());
+    }
+    return rs;
+}
 
-public String getUserName() {  
-    return userName;  
-}  
+public void close() {
+    try {
+        stmt.close();
+        conn.close();
+    } 
+    catch (Exception e) {
+        System.out.println(&quot;关闭失败?\n错误原因： &quot;+e.getMessage());
+    }
+    System.out.println(&quot;已断开与数据库的连接！&quot; );
+}
+}
+</code></pre><p><strong>注：除源代码外，还需要相应的jar包</strong></p>
 
-public void setUserName(String userName) {  
-    this.userName = userName;  
-}  
-
-public String getPwd() {  
-    return pwd;  
-}  
-
-public void setPwd(String pwd) {  
-    this.pwd = pwd;  
-}  
-
-}  
-</code></pre><p> <strong>数据库连接类</strong></p>
-<pre><code>  package com.keith.util;  
-
-import java.sql.Connection;  
-import java.sql.DriverManager;  
-import java.sql.SQLException;  
-
-public class DBConn {  
-private static final String DBDRIVER = &quot;com.mysql.jdbc.Driver&quot;;  
-private static final String DBURL = &quot;jdbc:mysql://127.0.0.1:3306/login&quot;;  
-private static final String DBUSER = &quot;root&quot;;  
-private static final String DBPWD = &quot;kejianjun&quot;;  
-private Connection conn = null;  
-
-public DBConn() {  
-    try {  
-        Class.forName(DBDRIVER);  
-        conn = DriverManager.getConnection(DBURL, DBUSER, DBPWD);  
-    } catch (ClassNotFoundException e) {  
-        e.printStackTrace();  
-    } catch (SQLException e) {  
-        e.printStackTrace();  
-    }  
-
-}  
-
-public void close() throws Exception{  
-    if (this.conn != null) {  
-        try {  
-            conn.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-
-    }  
-}  
-public Connection getConn() {  
-    return conn;  
-}  
-
-public void setConn(Connection conn) {  
-    this.conn = conn;  
-}  
-
-}  
-</code></pre><p><strong>View:登录jsp页面</strong></p>
-<pre><code> &lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;utf-8&quot;%&gt;  
-  &lt;%  
- String path = request.getContextPath();  
- String basePath = request.getScheme()+&quot;://&quot;+request.getServerName()+&quot;:&quot;+request.getServerPort()+path+&quot;/&quot;;  
-%&gt;  
-
-&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;  
-&lt;html&gt;  
- &lt;head&gt;  
-&lt;base href=&quot;&lt;%=basePath%&gt;&quot;&gt;  
-
-&lt;title&gt;My JSP &apos;index.jsp&apos; starting page&lt;/title&gt;  
-&lt;meta http-equiv=&quot;pragma&quot; content=&quot;no-cache&quot;&gt;  
-&lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot;&gt;  
-&lt;meta http-equiv=&quot;expires&quot; content=&quot;0&quot;&gt;      
-&lt;meta http-equiv=&quot;keywords&quot; content=&quot;keyword1,keyword2,keyword3&quot;&gt;  
-&lt;meta http-equiv=&quot;description&quot; content=&quot;This is my page&quot;&gt;  
-&lt;!--  
-&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;styles.css&quot;&gt;  
-  --&gt;  
-&lt;script type=&quot;text/javascript&quot;&gt;  
-    function validate(f){  
-        if (!(/^\w{4,15}$/.test(f.username.value))) {  
-            alert(&quot;用户名必须是4~16位！&quot;);  
-            f.username.focus();  
-            return false;  
-        }  
-        if (!(/^\w{4,15}$/.test(f.pwd.value))) {  
-            alert(&quot;密码必须是4~15位!&quot;);  
-            f.pwd.focus();  
-            return false;  
-        }  
-        return true;  
-    }  
-&lt;/script&gt;  
-&lt;/head&gt;  
-
-&lt;body&gt;  
-&lt;%  
-List&lt;String&gt; info = (List&lt;String&gt;)request.getAttribute(&quot;info&quot;);  
-if(info != null){  
-    Iterator&lt;String&gt; iter = info.iterator();  
-    while(iter.hasNext()){  
-%&gt;  
-&lt;h3&gt;&lt;font color=&quot;red&quot;&gt;&lt;%=iter.next() %&gt;&lt;/font&gt;&lt;/h3&gt;   
-&lt;%}  
-} %&gt;  
-&lt;form action=&quot;login&quot; method=&quot;post&quot; onsubmit=&quot;return validate(this)&quot; name=&quot;f&quot;&gt;  
-    用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br /&gt;  
-    密&amp;nbsp;码:&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;br /&gt;  
-    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;  
-    &lt;input type=&quot;reset&quot; value=&quot;取消&quot;&gt;         
-&lt;/form&gt;  
-&lt;/body&gt;  
-&lt;/html&gt;  
-</code></pre><p><strong>配置Web.xml</strong></p>
-<pre><code> &lt;servlet&gt;  
- &lt;servlet-name&gt;login&lt;/servlet-name&gt;  
-&lt;servlet-class&gt;com.keith.servlet.LoginServlet&lt;/servlet-class&gt;  
-&lt;/servlet&gt;    
- &lt;servlet-mapping&gt;  
-&lt;servlet-name&gt;login&lt;/servlet-name&gt;  
-&lt;url-pattern&gt;/login&lt;/url-pattern&gt;  
-&lt;/servlet-mapping&gt;  
-
- &lt;servlet&gt;  
-</code></pre><p> <strong>Contorller控制层 servlet</strong></p>
-<pre><code>package com.keith.servlet;  
-
-import java.io.IOException;  
-import java.util.ArrayList;  
-import java.util.List;  
-
-import javax.servlet.ServletException;  
-import javax.servlet.http.HttpServlet;  
-import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
-
-import com.keith.bean.TUser;  
-import com.keith.factory.DAOFactory;  
-
-
-public class LoginServlet extends HttpServlet {  
-private static final long serialVersionUID = 1L;  
-
-@Override  
-protected void doGet(HttpServletRequest req, HttpServletResponse resp)  
-        throws ServletException, IOException {  
-    this.doPost(req, resp);  
-}  
-
-@Override  
-protected void doPost(HttpServletRequest req, HttpServletResponse resp)  
-        throws ServletException, IOException {  
-    String sucPath = &quot;main.jsp&quot;;  
-    String loginEroPath = &quot;index.jsp&quot;;  
-    String username = req.getParameter(&quot;username&quot;);  
-    String pwd = req.getParameter(&quot;pwd&quot;);  
-    List&lt;String&gt; info = new ArrayList&lt;String&gt;();  
-    if (username == null || &quot;&quot;.equals(username)) {  
-        info.add(&quot;用户名不能为空!&quot;);  
-    }  
-    if (pwd == null || &quot;&quot;.equals(pwd)) {  
-        info.add(&quot;密码不能为空！&quot;);  
-    }  
-    //用户名密码通过验证  
-    if (info.size() == 0) {  
-        //实例化VO  
-        TUser user = new TUser();  
-        //设置username  
-        user.setUserName(username);  
-        //设置pwd  
-        user.setPwd(pwd);  
-        if (DAOFactory.getIUserDAOInstance().findLogin(user)) {  
-            info.add(&quot;欢迎：&quot; + user.getUserName());  
-            //保存信息，进行跳转  
-            req.setAttribute(&quot;info&quot;, info);  
-            req.getRequestDispatcher(sucPath).forward(req, resp);  
-        } else {  
-            info.add(&quot;用户信息错误！&quot;);  
-            req.setAttribute(&quot;info&quot;, info);  
-            req.getRequestDispatcher(loginEroPath).forward(req, resp);  
-        }  
-    }  
-}  
-
-}  
-</code></pre><p><strong>通过DAO工厂找到UserDAO的实例：这是DAOFactory：</strong></p>
-<pre><code>package com.keith.factory;  
-
-import com.keith.dao.IUserDAO;  
-import com.keith.dao.proxy.UserDAOProxy;  
-
-
-public class DAOFactory {  
-
-public static IUserDAO getIUserDAOInstance(){  
-    //返回代理实例  
-    return new UserDAOProxy();  
-}  
-}  
-</code></pre><p><strong>返回代理实例，找到userDAO的代理类：</strong></p>
-<pre><code> Java代码  
-
- package com.keith.dao.proxy;  
-
-  import com.keith.bean.TUser;  
- import com.keith.dao.IUserDAO;  
- import com.keith.dao.UserDAOImpl;  
-import com.keith.util.DBConn;  
-
-   /** 
-   * DAO代理操作类 
-   *  
-   * @author T 
-   *  
- */  
-public class UserDAOProxy implements IUserDAO {  
-private DBConn dbc = null;  
-private IUserDAO dao = null;  
-
-public UserDAOProxy() {  
-    //实例化数据库连接  
-    this.dbc = new DBConn();  
-    this.dao = new UserDAOImpl(this.dbc.getConn());  
-}  
-
-/** 
- * 代理登陆方法 
- */  
-public boolean findLogin(TUser user) {  
-    boolean flag = false;  
-    try {  
-        // 调用真实主题  
-        flag = this.dao.findLogin(user);  
-        this.dbc.close();  
-    } catch (Exception e) {  
-        e.printStackTrace();  
-    }  
-    return flag;  
-}  
-</code></pre><p> }<br> <strong>找到UserDAOImpl的并执行它的findLogin()方法：</strong></p>
-<pre><code> Java代码  
-
-package com.keith.dao;  
-
- import java.sql.Connection;  
- import java.sql.PreparedStatement;  
- import java.sql.ResultSet;  
-import java.sql.SQLException;  
-
-import com.keith.bean.TUser;  
-
-public class UserDAOImpl implements IUserDAO {  
-private Connection conn = null;  
-private PreparedStatement pstm = null;  
-
-public UserDAOImpl(Connection conn) {  
-    this.conn = conn;  
-}  
-
-
-public boolean findLogin(TUser user) {  
-    boolean flag = false;  
-    try {  
-        String sql = &quot;SELECT username,pwd FROM tuser WHERE username=? and pwd=?&quot;;  
-        this.pstm = this.conn.prepareStatement(sql);  
-        this.pstm.setString(1, user.getUserName());  
-        this.pstm.setString(2, user.getPwd());  
-        ResultSet rs = this.pstm.executeQuery();  
-        if (rs.next()) {  
-            user.setUserName(rs.getString(1));  
-            flag = true;  
-        }  
-    } catch (SQLException e) {  
-        e.printStackTrace();  
-    } finally {  
-        try {  
-            if (this.pstm != null) {  
-                this.pstm.close();  
-            }  
-        } catch (SQLException e2) {  
-            e2.printStackTrace();  
-        }  
-    }  
-    return flag;  
-}  
-</code></pre><p>}<br> <strong>实现了IUserDAO接口：</strong></p>
-<pre><code>Java代码  
-
-package com.keith.dao;  
-
-import java.sql.SQLException;  
-
-import com.keith.bean.TUser;  
-
-
-public interface IUserDAO {  
-
-public boolean findLogin(TUser user);  
- }  
-</code></pre>
       
       
         <div class="page-reward">
@@ -581,13 +395,13 @@ public boolean findLogin(TUser user);
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/09/12/MVC/">MVC(Model-View-Controller)实例应用模式</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/19/数据库连接实例/">数据库连接实例</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Jin Peigang 的个人博客">Jin Peigang</a></p>
-        <p><span>发布时间:</span>2017年09月12日 - 08时39分</p>
-        <p><span>最后更新:</span>2017年09月12日 - 08时39分</p>
+        <p><span>发布时间:</span>2017年08月19日 - 18时03分</p>
+        <p><span>最后更新:</span>2017年09月19日 - 18时13分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/09/12/MVC/" title="MVC(Model-View-Controller)实例应用模式">http://yoursite.com/2017/09/12/MVC/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/09/12/MVC/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/19/数据库连接实例/" title="数据库连接实例">http://yoursite.com/2017/08/19/数据库连接实例/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/19/数据库连接实例/　　作者: Jin Peigang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -600,20 +414,15 @@ public boolean findLogin(TUser user);
 
 <nav id="article-nav">
   
-    <a href="/2017/09/19/hadoop伪分布式配置/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/10/githubPages/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          hadoop伪分布式配置
+          githubPages
         
       </div>
     </a>
   
-  
-    <a href="/2017/09/10/githubPages/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">githubPages</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
   
 </nav>
 
@@ -688,15 +497,13 @@ public boolean findLogin(TUser user);
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/09/19/hadoop伪分布式配置/" title="上一篇: hadoop伪分布式配置">
+            <a href="/2017/09/10/githubPages/" title="上一篇: githubPages">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/09/10/githubPages/" title="下一篇: githubPages">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
     <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/09/19/hadoop伪分布式配置/">hadoop伪分布式配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/12/MVC/">MVC(Model-View-Controller)实例应用模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/10/githubPages/">githubPages</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/19/数据库连接实例/">数据库连接实例</a></li></ul>
